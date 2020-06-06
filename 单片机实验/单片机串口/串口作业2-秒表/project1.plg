@@ -1,0 +1,29 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+F:\Keil\program\project1.uvproj
+Project File Date:  05/20/2020
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling usartseg.c...
+C:\USERS\LENOVO\DESKTOP\单片机\单片机实验\单片机串口\串口作业1-首种覾USARTSEG.C(206): error C141: syntax error near 'uart_send_str'
+assembling bcd_to_led.asm...
+Target not created
+Build target 'Target 1'
+compiling usartseg.c...
+C:\USERS\LENOVO\DESKTOP\单片机\单片机实验\单片机串口\串口作业1-首种覾USARTSEG.C(206): error C141: syntax error near 'uart_send_str'
+assembling bcd_to_led.asm...
+Target not created
+Build target 'Target 1'
+compiling usartseg.c...
+C:\USERS\LENOVO\DESKTOP\单片机\单片机实验\单片机串口\串口作业1-首种覾USARTSEG.C(206): error C141: syntax error near 'uart_send_str'
+assembling bcd_to_led.asm...
+Target not created
+Build target 'Target 1'
+compiling usartseg.c...
+C:\USERS\LENOVO\DESKTOP\单片机\单片机实验\单片机串口\串口作业1-首种覾USARTSEG.C(206): error C141: syntax error near 'uart_send_str'
+assembling bcd_to_led.asm...
+Target not created

@@ -1,0 +1,3 @@
+"C:\Users\lenovo\Desktop\ÖÐ¶Ï2\gH1Kl-1588675925628-time1602\lcd1602.obj" 
+TO "C:\Users\lenovo\Desktop\ÖÐ¶Ï2\gH1Kl-1588675925628-time1602\project1" 
+PRINT(".\project1.m51") RAMSIZE(256) 

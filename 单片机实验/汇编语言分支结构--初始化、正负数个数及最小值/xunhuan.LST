@@ -1,0 +1,116 @@
+A51 MACRO ASSEMBLER  XUNHUAN                                                              04/04/2020 23:35:44 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN xunhuan.OBJ
+ASSEMBLER INVOKED BY: F:\Keil\C51\BIN\A51.EXE xunhuan.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1               ORG 0000H
+0000 020100            2               LJMP MAIN
+0100                   3               ORG 0100H
+                       4     
+0100 74F8              5     MAIN: MOV A,#-08H       ;…Ë÷√≥ı º÷µ
+0102 781E              6               MOV R0,#1EH   ;œ¬“ªµÿ÷∑Œ™20
+0104 7A13              7               MOV R2,#13H   ;18∏ˆ ÷µ
+                       8     
+                       9     
+0106 04               10     INIT: INC A
+0107 08               11               INC R0
+0108 F6               12               MOV @R0,A
+0109 DAFB             13               DJNZ R2,INIT
+                      14                     
+010B 7820             15               MOV R0,#20H   
+010D 7A13             16               MOV R2,#13H           
+010F 756300           17               MOV 63H,#0H           ;’ ◊Ó¥Û÷µ
+0112 7564FF           18               MOV 64H,#-1H          ; ∏∫ ◊Ó–°÷µ
+0115 8000             19               SJMP START
+                      20     
+0117 E6               21     START: MOV A,@R0
+0118 DA02             22                DJNZ R2,NEXT
+011A 8049             23                SJMP DONE
+                      24     
+011C 6005             25     NEXT:  JZ ZERO            ;X=0
+011E 20E70A           26                JB ACC.7, NEGATIVE  ;X<0
+0121 8025             27                SJMP  POSITIVE               ;X>0
+                      28     
+                      29     
+0123 E562             30     ZERO:  MOV A, 62H                 ;X=0
+0125 04               31                INC A
+0126 F562             32                MOV 62H, A
+0128 08               33                INC R0
+0129 80EC             34                SJMP START
+                      35     
+012B 8564F0           36     NEGATIVE: MOV B,64H
+012E F564             37                       MOV 64H,A                      ;X<0           
+0130 E561             38                       MOV A, 61H            ;º∆À„ ¡ø  
+0132 04               39               INC A
+0133 F561             40               MOV 61H, A
+0135 08               41               INC R0
+                      42                                              
+0136 E564             43                       MOV A,64H                ;MIN
+0138 B5F002           44               CJNE A,B,CHANGE1
+                      45     
+013B 80DA             46                       SJMP START
+                      47     
+013D 5004             48     CHANGE1: JNC SMALL                                                                      ;∏∫
+                              ◊Ó–°÷µ
+013F F564             49                      MOV 64H,A
+0141 80D4             50                      SJMP START
+                      51     
+0143 85F064           52     SMALL: MOV 64H,B
+0146 80CF             53                SJMP START
+                      54     
+0148 8563F0           55     POSITIVE: MOV B,63H
+014B F563             56                       MOV 63H,A
+014D E560             57                       MOV A, 60H              ;X>0
+A51 MACRO ASSEMBLER  XUNHUAN                                                              04/04/2020 23:35:44 PAGE     2
+
+014F 04               58                       INC A
+0150 F560             59                       MOV 60H, A
+0152 08               60                       INC R0
+                      61     
+0153 E563             62                       MOV A,63H                ;MAX
+0155 B5F002           63               CJNE A,B,CHANGE2
+                      64                       
+0158 80BD             65                       SJMP START
+                      66     
+015A 5005             67     CHANGE2: JNC BIGGER
+015C 85F063           68                      MOV 63H,B
+015F 80B6             69                      SJMP START 
+                      70     
+0161 F563             71     BIGGER: MOV 63H,A
+0163 80B2             72                     SJMP START
+                      73     
+0165 80FE             74     DONE:   SJMP DONE
+                      75     
+                      76     END
+A51 MACRO ASSEMBLER  XUNHUAN                                                              04/04/2020 23:35:44 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+BIGGER . . . . . .  C ADDR   0161H   A   
+CHANGE1. . . . . .  C ADDR   013DH   A   
+CHANGE2. . . . . .  C ADDR   015AH   A   
+DONE . . . . . . .  C ADDR   0165H   A   
+INIT . . . . . . .  C ADDR   0106H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEGATIVE . . . . .  C ADDR   012BH   A   
+NEXT . . . . . . .  C ADDR   011CH   A   
+POSITIVE . . . . .  C ADDR   0148H   A   
+SMALL. . . . . . .  C ADDR   0143H   A   
+START. . . . . . .  C ADDR   0117H   A   
+ZERO . . . . . . .  C ADDR   0123H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

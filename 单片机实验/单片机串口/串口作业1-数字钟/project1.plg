@@ -1,0 +1,15 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+F:\Keil\program\project1.uvproj
+Project File Date:  06/03/2020
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling jisuanqi.c...
+linking...
+Program Size: data=34.0 xdata=0 code=2154
+creating hex file from "C:\Users\lenovo\Desktop\单片机实验\project1"...
+"C:\Users\lenovo\Desktop\单片机实验\project1" - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,70 @@
+A51 MACRO ASSEMBLER  SHIYAN8                                                              04/16/2020 01:19:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN shiyan8.OBJ
+ASSEMBLER INVOKED BY: F:\Keil\C51\BIN\A51.EXE shiyan8.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     DE  SEGMENT CODE      ;定义为再定位程序段 
+                       2             PUBLIC   init,_turn_to_ascii         ;max，turnascii为其他模块调用
+----                   3             RSEG   DE ;选择DE为当前段
+                       4     
+                       5     
+0000 7914              6     init:           MOV R1,#14H   
+0002 7830              7                             MOV R0,#30H       
+0004 7400              8                             MOV A,#00H   
+0006 F6                9     XUNHUAN:    MOV @R0,A
+0007 04               10                             INC A
+0008 08               11                             INC R0
+0009 D9FB             12                             DJNZ R1,XUNHUAN  
+000B 22               13                     RET 
+                      14                             
+                      15     
+000C ED               16     _turn_to_ascii: MOV A,R5  ;取参蕄2 
+000D F8               17                             MOV R0,A
+000E 7950             18                             MOV  R1,  #50H           
+0010 7700             19                         MOV  @R1,  #0          
+0012 E6               20                         MOV  A,  @R0                 
+                      21                             
+0013 D7               22                         XCHD  A,  @R1           
+0014 435030           23                         ORL  50H,  #30H           
+0017 C4               24                         SWAP  A
+0018 4430             25                         ORL  A,  #30H              
+001A F551             26                         MOV  51H,  A 
+001C EF               27                             MOV A,R7   ;取参蕄1
+001D FA               28                             MOV R2,A
+001E 906000           29                             MOV DPTR,#6000H
+0021 6003             30                             JZ ZHUANYI
+0023 A3               31     LOOP:           INC DPTR
+0024 DAFD             32                             DJNZ R2,LOOP 
+0026 7950             33     ZHUANYI:        MOV  R1, #50H
+0028 E7               34                             MOV  A, @R1
+0029 F0               35                             MOVX @DPTR,A
+002A A3               36                             INC DPTR
+002B 09               37                             INC R1
+002C E7               38                             MOV  A, @R1
+002D F0               39                             MOVX @DPTR,A
+002E 22               40                     RET 
+                      41                             END
+A51 MACRO ASSEMBLER  SHIYAN8                                                              04/16/2020 01:19:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DE . . . . . . . .  C SEG    002FH       REL=UNIT
+INIT . . . . . . .  C ADDR   0000H   R   SEG=DE
+LOOP . . . . . . .  C ADDR   0023H   R   SEG=DE
+XUNHUAN. . . . . .  C ADDR   0006H   R   SEG=DE
+ZHUANYI. . . . . .  C ADDR   0026H   R   SEG=DE
+_TURN_TO_ASCII . .  C ADDR   000CH   R   SEG=DE
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

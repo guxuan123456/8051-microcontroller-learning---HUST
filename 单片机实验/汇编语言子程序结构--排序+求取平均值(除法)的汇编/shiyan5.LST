@@ -1,0 +1,212 @@
+A51 MACRO ASSEMBLER  SHIYAN5                                                              04/06/2020 11:59:48 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN shiyan5.OBJ
+ASSEMBLER INVOKED BY: F:\Keil\C51\BIN\A51.EXE shiyan5.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1      
+                       2     
+0000                   3               ORG 0000H
+0000 020100            4               LJMP MAIN
+0100                   5               ORG 0100H
+                       6     
+0100 7420              7     MAIN: MOV A,#20H        ;≥ı º÷µµÕŒª
+0102 904050            8               MOV DPTR,#4050H
+0105 7A10              9               MOV R2,#10H
+                      10     
+0107 3110             11               ACALL INIT
+0109 3123             12               ACALL AVERAGE
+010B 31B4             13               ACALL SORT
+010D 0201D9           14               LJMP DONE
+                      15     
+0110 F0               16     INIT: MOVX @DPTR,A
+0111 A3               17               INC DPTR
+0112 14               18               DEC A 
+0113 F5F0             19               MOV B,A
+0115 7401             20               MOV A,#01H       ;∏ﬂŒª…Ë÷√01H
+0117 F0               21               MOVX @DPTR,A
+0118 E5F0             22               MOV A,B
+011A A3               23               INC DPTR
+011B DAF3             24               DJNZ R2,INIT
+011D 904050           25               MOV DPTR,#4050H
+0120 7A10             26               MOV R2,#10H
+0122 22               27               RET
+                      28     
+0123 E0               29     AVERAGE: MOVX A,@DPTR
+0124 F5F0             30                      MOV B,A
+0126 E520             31                      MOV A,20H
+                      32     
+0128 25F0             33                      ADD A,B
+012A F520             34                      MOV 20H,A
+012C E521             35                      MOV A,21H
+012E 3400             36                      ADDC A,#00H
+0130 F521             37                      MOV 21H,A
+0132 A3               38                      INC DPTR
+0133 A3               39                      INC DPTR
+0134 DAED             40                      DJNZ R2,AVERAGE
+0136 904051           41                      MOV DPTR,#4051H
+0139 7A10             42                      MOV R2,#10H
+013B 8000             43                      SJMP SUMHIGH
+                      44     
+                      45     
+013D E0               46     SUMHIGH: MOVX A,@DPTR
+013E F5F0             47                      MOV B,A
+0140 E521             48                      MOV A,21H
+                      49     
+0142 25F0             50                      ADD A,B
+0144 F521             51                      MOV 21H,A
+0146 E522             52                      MOV A,22H
+0148 3400             53                      ADDC A,#00H
+014A F522             54                      MOV 22H,A
+014C A3               55                      INC DPTR
+014D A3               56                      INC DPTR
+014E DAED             57                      DJNZ R2,SUMHIGH
+                      58     
+A51 MACRO ASSEMBLER  SHIYAN5                                                              04/06/2020 11:59:48 PAGE     2
+
+0150 7D10             59                      MOV R5,#10H
+0152 AE21             60              MOV R6,21H
+0154 AF20             61                  MOV R7,20H
+0156 8001             62                  SJMP DIV_H2
+0158 22               63                      RET
+0159                  64     DIV_H2:                                                 ;≥ ∏ﬂ8ŒªŒ™00H£¨±ª≥ ∏ﬂ8Œ™∑«00H£¨‘Ú”‡
+                              øœ∂® «µ•◊÷Ω⁄£®8Œª“‘ƒ⁄£¨R4=00H£©
+0159 ED               65             MOV      A,R5
+015A F8               66             MOV      R0,A                                   ;R0‘›¥Ê≥ 
+015B F5F0             67             MOV      B,A    
+015D EE               68             MOV      A,R6                                   
+015E 84               69             DIV      AB                                     ;±ª≥ ∏ﬂ8Œª≥“‘”‡ 
+015F 20D23B           70             JB       OV,UIDIV_END           ;ºÏ≤ÈµΩ≥ µÕ8Œª“≤Œ™00H£¨÷±Ω”Ω· ¯≥Ã–Ú£®OV=1£©
+0162 FE               71             MOV      R6,A                                   
+0163 ADF0             72             MOV      R5,B                                   ;…Ã¥Ê‘⁄R6£¨”‡ ¥Ê‘⁄R5
+0165 75F008           73             MOV      B,#08H                                 ;“∆Œªœ‡ºıπ≤08H¥Œ
+0168                  74     UIDIV_LOOP2:                                            ;µÕ8Œª‘ÀÀ„
+0168 EF               75             MOV      A,R7
+0169 33               76             RLC     A                           
+016A FF               77             MOV R7,A
+016B 400C             78         JC       NEXT                   
+016D 8000             79         SJMP JIA0                                            
+016F ED               80     JIA0: MOV A,R5
+0170 33               81           RLC A
+                      82                                              
+0171 FD               83               MOV R5,A          
+                      84     
+0172 8810             85               MOV 10H,R0                
+0174 B5100E           86               CJNE A,10H,CHANGE              
+0177 8018             87               SJMP NEXT2
+                      88     
+0179 ED               89     NEXT: MOV A,R5
+017A 2D               90           ADD A,R5
+017B 2401             91               ADD A,#01H    
+017D FD               92               MOV R5,A          
+017E 8810             93               MOV 10H,R0
+0180 B51002           94               CJNE A,10H,CHANGE
+                      95              
+0183 800C             96               SJMP NEXT2    
+0185 500A             97     CHANGE: JNC NEXT2
+0187 8000             98             SJMP NEXT1
+0189                  99     NEXT1:
+                     100     
+0189 E9              101             MOV A,R1
+018A 29              102             ADD A,R1
+018B F9              103             MOV R1,A
+018C D5F0D9          104             DJNZ  B,UIDIV_LOOP2      
+018F 800E            105             SJMP DONE1
+0191                 106     NEXT2: 
+0191 98              107         SUBB A,R0   
+0192 FD              108         MOV R5,A     
+0193 E9              109         MOV A,R1
+0194 29              110             ADD A,R1
+                     111             
+0195 2401            112             ADD A,#01H
+0197 F9              113             MOV R1,A
+0198 D5F0CD          114             DJNZ   B,UIDIV_LOOP2     
+019B 8002            115             SJMP DONE1
+019D                 116     UIDIV_END:      
+019D 8000            117             SJMP DONE1
+                     118     
+019F 8922            119     DONE1:MOV 22H,R1
+01A1 8E23            120             MOV 23H,R6
+01A3 8D24            121         MOV 24H,R5
+01A5 E522            122             MOV A,22H
+01A7 904080          123             MOV DPTR,#4080H
+A51 MACRO ASSEMBLER  SHIYAN5                                                              04/06/2020 11:59:48 PAGE     3
+
+01AA F0              124             MOVX @DPTR,A
+01AB A3              125             INC DPTR
+01AC E523            126             MOV A,23H
+01AE F0              127             MOVX @DPTR,A
+01AF A3              128             INC DPTR
+01B0 E524            129             MOV A,24H
+01B2 F0              130             MOVX @DPTR,A
+01B3 22              131             RET
+                     132     
+                     133     
+                     134     
+                     135     
+01B4 904050          136     SORT: MOV DPTR,#4050H
+01B7 7830            137               MOV R0,#30H
+01B9 7A20            138               MOV R2,#20H
+01BB 8000            139               SJMP MOVE
+                     140     
+01BD E0              141     MOVE: MOVX A,@DPTR
+01BE F6              142           MOV @R0,A
+01BF 08              143               INC R0
+01C0 A3              144               INC DPTR
+01C1 DAFA            145               DJNZ R2,MOVE
+01C3 784E            146               MOV R0,#4EH
+01C5 7A10            147               MOV R2,#10H
+01C7 904050          148               MOV DPTR,#4050H
+01CA 8000            149               SJMP PAIXU
+                     150     
+01CC E6              151     PAIXU: MOV A,@R0
+01CD F0              152                MOVX @DPTR,A
+01CE A3              153                INC DPTR
+01CF 08              154                INC R0
+01D0 E6              155                MOV A,@R0
+01D1 F0              156                MOVX @DPTR,A
+01D2 A3              157                INC DPTR
+01D3 18              158                DEC R0
+01D4 18              159                DEC R0
+01D5 18              160                DEC R0
+01D6 DAF4            161                DJNZ R2,PAIXU
+01D8 22              162                RET
+                     163               
+01D9 80FE            164     DONE: SJMP DONE
+                     165     END
+A51 MACRO ASSEMBLER  SHIYAN5                                                              04/06/2020 11:59:48 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+AVERAGE. . . . . .  C ADDR   0123H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+CHANGE . . . . . .  C ADDR   0185H   A   
+DIV_H2 . . . . . .  C ADDR   0159H   A   
+DONE . . . . . . .  C ADDR   01D9H   A   
+DONE1. . . . . . .  C ADDR   019FH   A   
+INIT . . . . . . .  C ADDR   0110H   A   
+JIA0 . . . . . . .  C ADDR   016FH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+MOVE . . . . . . .  C ADDR   01BDH   A   
+NEXT . . . . . . .  C ADDR   0179H   A   
+NEXT1. . . . . . .  C ADDR   0189H   A   
+NEXT2. . . . . . .  C ADDR   0191H   A   
+OV . . . . . . . .  B ADDR   00D0H.2 A   
+PAIXU. . . . . . .  C ADDR   01CCH   A   
+SORT . . . . . . .  C ADDR   01B4H   A   
+SUMHIGH. . . . . .  C ADDR   013DH   A   
+UIDIV_END. . . . .  C ADDR   019DH   A   
+UIDIV_LOOP2. . . .  C ADDR   0168H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

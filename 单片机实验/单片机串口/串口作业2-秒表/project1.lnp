@@ -1,0 +1,4 @@
+"C:\Users\lenovo\Desktop\单片机\单片机实验\单片机串口\串口作业2-秒表\usartseg.obj",
+"C:\Users\lenovo\Desktop\单片机\单片机实验\单片机串口\串口作业2-秒表\bcd_to_led.obj" 
+TO "C:\Users\lenovo\Desktop\单片机\单片机实验\单片机串口\串口作业2-秒表\project1" 
+PRINT(".\project1.m51") RAMSIZE(256) 

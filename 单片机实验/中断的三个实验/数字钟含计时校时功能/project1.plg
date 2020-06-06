@@ -1,0 +1,22 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+F:\Keil\program\project1.uvproj
+Project File Date:  05/11/2020
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling LED1616.C...
+linking...
+Program Size: data=29.0 xdata=0 code=2992
+creating hex file from "C:\Users\lenovo\Desktop\中断2\OMd0g-1587804988111-led1616\project1"...
+"C:\Users\lenovo\Desktop\中断2\OMd0g-1587804988111-led1616\project1" - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+compiling LED1616.C...
+C:\Users\lenovo\Desktop\中断2\OMd0g-1587804988111-led1616\LED1616.C(4): warning C318: can't open file 'hanzi1.h'
+linking...
+Program Size: data=29.0 xdata=0 code=2992
+creating hex file from "C:\Users\lenovo\Desktop\中断2\OMd0g-1587804988111-led1616\project1"...
+"C:\Users\lenovo\Desktop\中断2\OMd0g-1587804988111-led1616\project1" - 0 Error(s), 1 Warning(s).

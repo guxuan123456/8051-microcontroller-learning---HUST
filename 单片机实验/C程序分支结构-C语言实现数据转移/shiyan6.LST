@@ -1,0 +1,60 @@
+C51 COMPILER V9.01   SHIYAN6                                                               04/16/2020 00:15:13 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE SHIYAN6
+OBJECT MODULE PLACED IN shiyan6.OBJ
+COMPILER INVOKED BY: F:\Keil\C51\BIN\C51.EXE shiyan6.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          # include <absacc.h>
+   2          
+   3          main()
+   4          {
+   5   1        char xdata *p;        //存储数据初始位置
+   6   1        unsigned char begin = 0x16;
+   7   1        unsigned int sum = 0;
+   8   1      
+   9   1        for(p=0x4050;p<0x4060;p++)     //数据初始化
+  10   1        {
+  11   2               *p = begin;
+  12   2               begin++;
+  13   2        }
+  14   1      
+  15   1        // 循环求取最大最小值和平均数
+  16   1        XBYTE[0x4090] = 0;//最大值初始化
+  17   1        XBYTE[0x4091] = 0xFF;//最小值初始化
+  18   1      
+  19   1        for(p=0x4050;p<0x4060;p++)     //数据初始化
+  20   1        {
+  21   2               sum+=*p;  //求和
+  22   2      
+  23   2               if(XBYTE[0x4090]<*p){
+  24   3                 XBYTE[0x4090] = *p;
+  25   3               }
+  26   2      
+  27   2               if(XBYTE[0x4091]>*p){
+  28   3                 XBYTE[0x4091] = *p;
+  29   3               }
+  30   2        }
+  31   1      
+  32   1         //求平均值和余数
+  33   1          XBYTE[0x4080]  = sum/16;
+  34   1              XBYTE[0x4081]  = sum%16;
+  35   1      
+  36   1        return 0;
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    168    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

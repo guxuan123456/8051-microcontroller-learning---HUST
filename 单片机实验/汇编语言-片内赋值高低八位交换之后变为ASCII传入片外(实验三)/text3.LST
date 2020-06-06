@@ -1,0 +1,144 @@
+A51 MACRO ASSEMBLER  TEXT3                                                                03/15/2020 21:57:42 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN text3.OBJ
+ASSEMBLER INVOKED BY: F:\Keil\C51\BIN\A51.EXE text3.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+0000                   2                             ORG 0000H
+0000 020100            3                             LJMP MAIN
+                       4                     
+0100                   5                             ORG 0100H
+                       6                     
+0100 758140            7                     MAIN:MOV SP, #40H ;∏≥∂—’ª÷∏’Î
+                       8                     
+0103 752052            9                         MOV 20H, #LOW(5152H)
+0106 752151           10                             MOV 21H, #HIGH(5152H) ;
+0109 752254           11                         MOV 22H, #LOW(5354H)
+010C 752353           12                             MOV 23H, #HIGH(5354H)
+010F 752456           13                             MOV 24H, #LOW(5556H)
+0112 752555           14                             MOV 25H, #HIGH(5556H)
+0115 752658           15                             MOV 26H, #LOW(5758H)
+0118 752757           16                             MOV 27H, #HIGH(5758H)
+                      17                         
+                      18                     
+011B 903000           19                             MOV DPTR, #3000H
+                      20     
+011E E521             21                             MOV A,21H
+0120 540F             22                             ANL A, #0FH
+0122 4430             23                             ORL A, #30H
+0124 F0               24                             MOVX @DPTR, A
+0125 A3               25                             INC     DPTR
+0126 E521             26                             MOV A,21H
+0128 54F0             27                             ANL A,#0F0H
+012A C4               28                             SWAP A
+012B 4430             29                             ORL A, #30H
+012D F0               30                             MOVX @DPTR, A
+012E A3               31                             INC     DPTR
+                      32     
+012F E520             33                             MOV A,20H
+0131 540F             34                             ANL A, #0FH
+0133 4430             35                             ORL A, #30H
+0135 F0               36                             MOVX @DPTR, A
+0136 A3               37                             INC     DPTR
+0137 E520             38                             MOV A,20H
+0139 54F0             39                             ANL A,#0F0H
+013B C4               40                             SWAP A
+013C 4430             41                             ORL A, #30H
+013E F0               42                             MOVX @DPTR, A
+013F A3               43                             INC     DPTR
+                      44     
+0140 E523             45                             MOV A,23H
+0142 540F             46                             ANL A, #0FH
+0144 4430             47                             ORL A, #30H
+0146 F0               48                             MOVX @DPTR, A
+0147 A3               49                             INC     DPTR
+0148 E523             50                             MOV A,23H
+014A 54F0             51                             ANL A,#0F0H
+014C C4               52                             SWAP A
+014D 4430             53                             ORL A, #30H
+014F F0               54                             MOVX @DPTR, A
+0150 A3               55                             INC     DPTR
+                      56     
+0151 E522             57                             MOV A,22H
+0153 540F             58                             ANL A, #0FH
+A51 MACRO ASSEMBLER  TEXT3                                                                03/15/2020 21:57:42 PAGE     2
+
+0155 4430             59                             ORL A, #30H
+0157 F0               60                             MOVX @DPTR, A
+0158 A3               61                             INC     DPTR
+0159 E522             62                             MOV A,22H
+015B 54F0             63                             ANL A,#0F0H
+015D C4               64                             SWAP A
+015E 4430             65                             ORL A, #30H
+0160 F0               66                             MOVX @DPTR, A
+0161 A3               67                             INC     DPTR
+                      68     
+0162 E525             69                             MOV A,25H
+0164 540F             70                             ANL A, #0FH
+0166 4430             71                             ORL A, #30H
+0168 F0               72                             MOVX @DPTR, A
+0169 A3               73                             INC     DPTR
+016A E525             74                             MOV A,25H
+016C 54F0             75                             ANL A,#0F0H
+016E C4               76                             SWAP A
+016F 4430             77                             ORL A, #30H
+0171 F0               78                             MOVX @DPTR, A
+0172 A3               79                             INC     DPTR
+                      80                     
+                      81     
+0173 E524             82                             MOV A,24H
+0175 540F             83                             ANL A, #0FH
+0177 4430             84                             ORL A, #30H
+0179 F0               85                             MOVX @DPTR, A
+017A A3               86                             INC     DPTR
+017B E524             87                             MOV A,24H
+017D 54F0             88                             ANL A,#0F0H
+017F C4               89                             SWAP A
+0180 4430             90                             ORL A, #30H
+0182 F0               91                             MOVX @DPTR, A
+0183 A3               92                             INC     DPTR
+                      93     
+0184 E527             94                             MOV A,27H
+0186 540F             95                             ANL A, #0FH
+0188 4430             96                             ORL A, #30H
+018A F0               97                             MOVX @DPTR, A
+018B A3               98                             INC     DPTR
+018C E527             99                             MOV A,27H
+018E 54F0            100                             ANL A,#0F0H
+0190 C4              101                             SWAP A
+0191 4430            102                             ORL A, #30H
+0193 F0              103                             MOVX @DPTR, A
+0194 A3              104                             INC     DPTR
+                     105     
+0195 E526            106                             MOV A,26H
+0197 540F            107                             ANL A, #0FH
+0199 4430            108                             ORL A, #30H
+019B F0              109                             MOVX @DPTR, A
+019C A3              110                             INC     DPTR
+019D E526            111                             MOV A,26H
+019F 54F0            112                             ANL A,#0F0H
+01A1 C4              113                             SWAP A
+01A2 4430            114                             ORL A, #30H
+01A4 F0              115                             MOVX @DPTR, A
+01A5 A3              116                             INC     DPTR
+                     117                END
+A51 MACRO ASSEMBLER  TEXT3                                                                03/15/2020 21:57:42 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+MAIN . . . . . . .  C ADDR   0100H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

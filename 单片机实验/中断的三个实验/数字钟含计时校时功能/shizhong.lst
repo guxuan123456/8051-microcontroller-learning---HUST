@@ -1,0 +1,186 @@
+C51 COMPILER V9.01   SHIZHONG                                                              05/10/2020 23:56:37 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE SHIZHONG
+OBJECT MODULE PLACED IN C:\Users\lenovo\Desktop\中断2\YCs8X-1587561921573-int_ex3n\shizhong.obj
+COMPILER INVOKED BY: F:\Keil\C51\BIN\C51.EXE C:\Users\lenovo\Desktop\中断2\YCs8X-1587561921573-int_ex3n\shizhong.c BROWS
+                    -E DEBUG OBJECTEXTEND PRINT(.\shizhong.lst) OBJECT(C:\Users\lenovo\Desktop\中断2\YCs8X-1587561921573-int_ex3n\shizhong.ob
+                    -j)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<absacc.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          
+   6          //函数定义
+   7          extern  int bcd_to_led(uint x); //汇编子程序，传入DISPBUFF[6]中的数据
+   8          void delayms(); //延时函数
+   9          void display(); //显示函数
+  10          void time_jinwei_chuli();       //时间进位处理函数
+  11          
+  12          
+  13          // 全局变量定义
+  14          uint mode = 0; //1表示调整小时，2表示调整分钟，0表示不调整
+  15          uint second = 36,minute = 48,hour = 22,number = 0;   //秒，分，时，时间计数变量
+  16          uint DISPBUFF[6]={2,2,4,8,3,6};   //初始化数码管显示
+  17          uint dian_state[6]={0,0,0,0,0,0}; //数码管点的状态,亮或者不亮
+  18          
+  19          main()
+  20          {
+  21   1              // 定时器设置
+  22   1              IE = 0x87;          //1000 0111：开总中断，开中断INT1,T0,INT0
+  23   1              TCON = 0x15;    //0001 0101-->中断INT0和INT1选择下降沿触发，定时器T0启动。
+  24   1              TMOD = 0x01;    //工作模式0,13位定时计数器
+  25   1              TH0=-10000/256; //一次计数中断为10ms，需要中断100次到达1s
+  26   1              TL0=-10000%256;
+  27   1              while(1)  //无限循环，等待中断
+  28   1              {
+  29   2                      display();      
+  30   2              }                       
+  31   1      }
+  32          
+  33          
+  34          
+  35          void delayms()
+  36          {
+  37   1         uchar i;
+  38   1         for(i=200;i>0;i--){;}
+  39   1      }
+  40          
+  41          
+  42          void display()
+  43          {
+  44   1              uchar i;
+  45   1              P1=0xFE;//第一个灯
+  46   1              for(i=0;i<6;i++)
+  47   1              {
+  48   2                      P2=bcd_to_led(DISPBUFF[i])|dian_state[i];//调用汇编子程序变成数码管状态
+  49   2                      delayms();                                                               //和点状态想与得到最终显示状态
+  50   2                      P1=(P1<<1)+1;   
+  51   2              }
+  52   1      }
+  53          
+C51 COMPILER V9.01   SHIZHONG                                                              05/10/2020 23:56:37 PAGE 2   
+
+  54          // 中断函数设置
+  55          
+  56          int timer0() interrupt 1          //定时器0中断
+  57          {       
+  58   1              TH0=-10000/256; //一次计数中断为10ms，需要中断100次到达1s
+  59   1              TL0=-10000%256; //中断时设置初始值
+  60   1              number++;       //中断次数加1
+  61   1      
+  62   1              if(number == 100)       //1s
+  63   1              {               
+  64   2                 number = 0;  //计数值设为0
+  65   2                 second++;    //秒数加一
+  66   2                 time_jinwei_chuli(); //时间进位处理函数
+  67   2              }
+  68   1                      
+  69   1      }
+  70          
+  71          int MODE1() interrupt 0 //外部mode中断
+  72          {
+  73   1              delayms();
+  74   1              switch(mode) //最开始不调整
+  75   1              {
+  76   2                      //0表示不调整，1表示调小时，2表示调分钟
+  77   2                      case 0:    //不调整
+  78   2                              {
+  79   3                                      dian_state[0]=0x80;
+  80   3                                      dian_state[1]=0x80;
+  81   3                                      mode=1; //按键，跳转下一状态，调整小时                          
+  82   3                              };
+  83   2                              break;
+  84   2                      case 1:
+  85   2                              {
+  86   3                                      dian_state[0]=0x00;
+  87   3                                      dian_state[1]=0x00;
+  88   3                                      dian_state[2]=0x80;
+  89   3                                      dian_state[3]=0x80;
+  90   3                                      mode=2; //跳转下一状态，调整分钟
+  91   3                              };
+  92   2                              break;
+  93   2                      case 2:
+  94   2                              {
+  95   3                                      dian_state[0]=0x00;
+  96   3                                      dian_state[1]=0x00;
+  97   3                                      dian_state[2]=0x00;
+  98   3                                      dian_state[3]=0x00;
+  99   3                                      mode=0; //跳转下一状态，不调整                                                          
+ 100   3                              };
+ 101   2                              break;                  
+ 102   2              }
+ 103   1      }
+ 104          
+ 105          
+ 106          int ADD() interrupt 2  //外部中断，调整时间
+ 107          {       
+ 108   1              delayms();
+ 109   1      
+ 110   1              if(mode==1)       //调小时
+ 111   1              {
+ 112   2                      if(hour==23)hour=0;
+ 113   2                      else hour++;
+ 114   2              }
+ 115   1              else if(mode==2)  //调分钟
+C51 COMPILER V9.01   SHIZHONG                                                              05/10/2020 23:56:37 PAGE 3   
+
+ 116   1              {
+ 117   2                      if(minute==59)minute=0;
+ 118   2                      else minute++;
+ 119   2              }
+ 120   1              time_jinwei_chuli();
+ 121   1      }
+ 122          
+ 123          
+ 124          void time_jinwei_chuli()  //时间进位处理函数
+ 125          {
+ 126   1              if(second==60)   //满60s
+ 127   1              {
+ 128   2                      second=0;
+ 129   2                      minute++;
+ 130   2                      
+ 131   2                      if(minute==60)
+ 132   2                      {
+ 133   3                      minute=0;
+ 134   3                      hour++;
+ 135   3                              if(hour==24)
+ 136   3                              {
+ 137   4                                      hour=0;
+ 138   4                              }
+ 139   3                      }
+ 140   2              }
+ 141   1      
+ 142   1              DISPBUFF[0]=hour/10;
+ 143   1              DISPBUFF[1]=hour%10;
+ 144   1              DISPBUFF[2]=minute/10;
+ 145   1              DISPBUFF[3]=minute%10;
+ 146   1              DISPBUFF[4]=second/10;
+ 147   1              DISPBUFF[5]=second%10;  
+ 148   1      }
+ 149          
+ 150          
+ 151          
+ 152          
+ 153          
+ 154          
+ 155          
+ 156          
+ 157          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    549    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     34       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

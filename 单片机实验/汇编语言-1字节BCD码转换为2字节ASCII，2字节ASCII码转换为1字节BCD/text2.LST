@@ -1,0 +1,89 @@
+A51 MACRO ASSEMBLER  TEXT2                                                                03/15/2020 19:11:33 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN text2.OBJ
+ASSEMBLER INVOKED BY: F:\Keil\C51\BIN\A51.EXE text2.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1                     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14     
+                      15     
+                      16     
+                      17     
+                      18                     
+0000                  19                     ORG 0000H
+                      20                     
+0000 020100           21                     LJMP MAIN
+                      22                     
+0100                  23                     ORG 0100H
+                      24                     
+0100 758140           25                     MAIN:MOV SP, #40H ;赋堆栈指针
+                      26                     
+0103 753049           27                     MOV 30H,#49H;30H单元赋值
+                      28                     
+0106 7832             29                     MOV R0, #32H ;R0指针赋值
+                      30                     
+0108 7600             31                     MOV @R0, #0 ;32H单元清零
+                      32                     
+010A E530             33                     MOV A, 30H
+                      34                     
+010C D6               35                     XCHD A, @R0 ;拆分字节
+                      36                     
+010D 433230           37                     ORL 32H, #30H ;转换为ASCII
+                      38                     
+0110 C4               39                     SWAP A
+                      40                     
+0111 4430             41                     ORL A, #30H ;转换为ASCII
+                      42                     
+0113 F531             43                     MOV 31H, A ;结果存于31H单元
+                      44                     
+0115 E531             45                     MOV A, 31H;从31H单元取值
+                      46                     
+0117 540F             47                     ANL A, #0FH;转换为BCD
+                      48                     
+0119 C4               49                     SWAP A
+                      50                     
+011A F533             51                     MOV 33H, A;结果存于33H单元
+                      52                     
+011C E532             53                     MOV A, 32H;从32H单元取值
+                      54                     
+011E 540F             55                     ANL A, #0FH;转换为BCD
+                      56                     
+0120 4233             57                     ORL 33H, A;合并字节
+                      58                     
+A51 MACRO ASSEMBLER  TEXT2                                                                03/15/2020 19:11:33 PAGE     2
+
+0122 80FE             59                     HERE:SJMP HERE ;踏步
+                      60                     
+                      61                     END
+A51 MACRO ASSEMBLER  TEXT2                                                                03/15/2020 19:11:33 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0122H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

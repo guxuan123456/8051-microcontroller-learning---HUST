@@ -1,0 +1,41 @@
+C51 COMPILER V9.01   SHIYAN7                                                               04/16/2020 01:24:24 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE SHIYAN7
+OBJECT MODULE PLACED IN shiyan7.OBJ
+COMPILER INVOKED BY: F:\Keil\C51\BIN\C51.EXE shiyan7.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<absacc.h> 
+   2          extern  void turn_to_ascii(unsigned char p1, unsigned char p2);//定义汇编函数
+   3          extern  void init();  
+   4          void main(){ 
+   5   1              unsigned char p1;  //p1为片外储存转移地址
+   6   1              unsigned char p2;  //片内存储地址
+   7   1              unsigned char num;   //计数器
+   8   1              p1 = 0x00; //偏移地址为0
+   9   1              p2 = 0x30; //片内30H开始
+  10   1              init();    //初始化数据，调用汇编
+  11   1      
+  12   1              for(num = 0x00;num<0x14;num++){
+  13   2                      turn_to_ascii(p1,p2); //传递地址
+  14   2                      p1 = p1 + 2;              //片外地址转移2
+  15   2                      p2++;   //片内转移1
+  16   2              }
+  17   1              
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     35    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,76 @@
+A51 MACRO ASSEMBLER  FANGZHEN3_TEACHER                                                    03/24/2020 18:18:13 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN fangzhen3_teacher.OBJ
+ASSEMBLER INVOKED BY: F:\Keil\C51\BIN\A51.EXE fangzhen3_teacher.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;File name:    fangzhen3_teacher.asm
+                       2     ;Description:  1字节BCD码相加
+                       3     ;Date:             2020.3.24
+                       4     ;Designed by:   xuan gu
+                       5     ;Source used:    
+                       6     ;   31H+32H+33H+34H BCD data ->35H+36H(高位) BCD data 
+                       7     ;
+                       8     
+                       9     
+                      10     
+0000                  11                     ORG  0000H              
+0000 020100           12                             LJMP MAIN
+0100                  13                             ORG  0100H
+                      14     
+                      15     
+0100 758140           16     MAIN:           MOV  SP,  #40H           ;赋堆栈指针
+0103 C3               17                 CLR  C                       ;进位位清零
+                      18     
+0104 753149           19                         MOV  31H,  #49H          ;31H单元赋值
+0107 753287           20                         MOV  32H,  #87H          ;32H单元赋值
+010A 753369           21                 MOV  33H,  #69H          ;33H单元赋值
+010D 753482           22                         MOV  34H,  #82H          ;34H单元赋值
+0110 753500           23                 MOV  35H,  #00H          ;35H单元赋值
+0113 753600           24                         MOV  36H,  #00H          ;36H单元赋值
+                      25     
+0116 E531             26                         MOV  A,    31H            ;32H+31H 
+0118 2532             27                         ADD  A,    32H
+011A D4               28                         DA A                       ; BCD调整
+011B F535             29                         MOV  35H,    A
+011D E536             30                         MOV   A,36H
+011F 3400             31                         ADDC A,#00H              ;将进位存在高位36H
+0121 F536             32                 MOV  36H,    A 
+                      33     
+0123 E535             34                         MOV  A,    35H            ;32H+31H+33H 
+0125 2533             35                         ADD  A,    33H
+0127 D4               36                         DA A                       ; BCD调整
+0128 F535             37                         MOV  35H,    A
+012A E536             38                         MOV   A,36H
+012C 3400             39                         ADDC A,#00H              ;将进位存在高位36H
+012E F536             40                 MOV  36H,    A 
+0130 E535             41                 MOV  A,    35H            ;32H+31H+33H+34H 
+0132 2534             42                         ADD  A,    34H
+0134 D4               43                         DA A                       ; BCD调整
+0135 F535             44                         MOV  35H,    A
+0137 E536             45                         MOV   A,36H
+0139 3400             46                         ADDC A,#00H              ;将进位存在高位36H
+013B F536             47                 MOV 36H,    A 
+                      48                      
+013D 80FE             49     HERE:       SJMP  HERE                ;踏步
+                      50                         END 
+A51 MACRO ASSEMBLER  FANGZHEN3_TEACHER                                                    03/24/2020 18:18:13 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   013DH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

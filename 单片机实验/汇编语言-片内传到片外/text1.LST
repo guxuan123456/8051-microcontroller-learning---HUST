@@ -1,0 +1,69 @@
+A51 MACRO ASSEMBLER  TEXT1                                                                03/15/2020 15:37:15 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN text1.OBJ
+ASSEMBLER INVOKED BY: F:\Keil\C51\BIN\A51.EXE text1.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1                     
+                       2                     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+                       9     
+                      10     
+                      11     
+                      12     
+                      13     
+                      14                     
+0000                  15                     ORG 0000H
+                      16                     
+0000 020100           17                     LJMP MAIN
+                      18                     
+0100                  19                     ORG     0100H
+                      20                     
+0100 758140           21                     MAIN: MOV SP,#40H
+                      22                     
+0103 E4               23                     FILL: CLR A ; A¼Ä´æÆ÷ÇåÁã
+                      24                     
+0104 7800             25                     MOV R0, #00H;ÉèÑ­»·¼ÆÊÆ÷
+                      26                     
+0106 907000           27                     MOV DPTR, #7000H;ÉèÊ¾ÝÖ¸Õë
+                      28                     
+0109 F0               29                     FILL1:  MOVX @DPTR, A;´«ËÍµ½Æ¬ÍâRAM
+                      30                     
+010A 04               31                     INC A;AÄÚÈÝ¼Ó1
+                      32                     
+010B A3               33                     INC DPTR;ÐÞ¸ÄÊ¾ÝÖ¸Õë
+                      34                     
+010C 08               35                     INC R0;ÐÞ¸ÄÑ­»·¼ÆÊÆ÷
+                      36                     
+010D B800F9           37                     CJNE R0, #00H, FILL1
+                      38                     
+0110 80FE             39                     HERE:   SJMP HERE;Ô­µØÌ¤²½
+                      40                     
+                      41                     END
+A51 MACRO ASSEMBLER  TEXT1                                                                03/15/2020 15:37:15 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+FILL . . . . . . .  C ADDR   0103H   A   
+FILL1. . . . . . .  C ADDR   0109H   A   
+HERE . . . . . . .  C ADDR   0110H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
